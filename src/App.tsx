@@ -13,8 +13,8 @@ type AnswerObject = {
 
 const TOTAL_QUESTIONS = 10;
 
-const App = () => {
-  let [loading, setLoading] = useState(false);
+const App: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<QuestionState[]>([]);
   const [number, setNumber] = useState(0);
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
@@ -27,6 +27,13 @@ const App = () => {
   const startTrivia = async () => {
     setLoading = true;
     setGameOver = false;
+
+    const newQuestions = await fetchQuizQuestions(
+      TOTAL_QUESTIONS,
+      Difficulty.EASY
+    );
+
+    setQuestions(newQuestions);
   };
 
   const checkAnswer = (e:React.MouseEvent<HTMLButtonElement>) => {
