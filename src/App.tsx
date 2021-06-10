@@ -11,10 +11,12 @@ type AnswerObject = {
   correctAnswer: string;
 }
 
+type Loading = boolean;
+
 const TOTAL_QUESTIONS = 10;
 
 const App: React.FC = () => {
-  const [loading, setLoading] = useState(false);
+  let [loading, setLoading] = useState<Loading>(false);
   const [questions, setQuestions] = useState<QuestionState[]>([]);
   const [number, setNumber] = useState(0);
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
