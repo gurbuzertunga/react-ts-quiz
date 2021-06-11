@@ -11,24 +11,19 @@ type AnswerObject = {
   correctAnswer: string;
 }
 
-type Loading = boolean;
-
 const TOTAL_QUESTIONS = 10;
 
 const App: React.FC = () => {
-  let [loading, setLoading] = useState<Loading>(false);
+  const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<QuestionState[]>([]);
   const [number, setNumber] = useState(0);
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
-  console.log(fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY));
-  
-  
   const startTrivia = async () => {
-    setLoading = true;
-    setGameOver = false;
+    setLoading(true);
+    setGameOver(false);
 
     const newQuestions = await fetchQuizQuestions(
       TOTAL_QUESTIONS,
