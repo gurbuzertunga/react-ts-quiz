@@ -4,7 +4,7 @@ import QuestionCard from './components/QuestionCard';
 // TYPES
 import { QuestionState, Difficulty } from './API';
 
-type AnswerObject = {
+export type AnswerObject = {
   question: string;
   answer: string;
   correct: boolean;
@@ -61,8 +61,13 @@ const App: React.FC = () => {
 
   const nextQuestion = () => {
     // move onto the next question if not the last question
-    
-  };
+    const nextQuestion = number + 1;
+    if (nextQuestion === TOTAL_QUESTIONS) {
+      setGameOver(true);
+    } else {
+      setNumber(nextQuestion)
+    }
+  }
   return (
     <div className="App">
       <h1>React Quiz</h1>
@@ -75,17 +80,17 @@ const App: React.FC = () => {
       {!gameOver ? <p className="score">Score:</p> : null}
       {loading && <p>Loading Questions...</p>}
       {!loading && !gameOver && (
-      <QuestionCard
-        questionNumber={number + 1}
-        totalQuestions={TOTAL_QUESTIONS}
-        question={questions[number].question}
-        answers={questions[number].answers}
-        userAnswer={userAnswers ? userAnswers[number] : undefined}
-        callBack={checkAnswer}
-      />
+        <QuestionCard
+          questionNumber={number + 1}
+          totalQuestions={TOTAL_QUESTIONS}
+          question={questions[number].question}
+          answers={questions[number].answers}
+          userAnswer={userAnswers ? userAnswers[number] : undefined}
+          callBack={checkAnswer}
+        />
       )}
       {!loading && !gameOver && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
-      <button className="next" onClick={nextQuestion}>Next Question</button>
+        <button className="next" onClick={nextQuestion}>Next Question</button>
       ) : null}
     </div>
   );
