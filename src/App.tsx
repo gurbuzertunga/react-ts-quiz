@@ -25,15 +25,22 @@ const App: React.FC = () => {
     setLoading(true);
     setGameOver(false);
 
+    console.log(questions);
+
+
     const newQuestions = await fetchQuizQuestions(
       TOTAL_QUESTIONS,
       Difficulty.EASY
     );
 
     setQuestions(newQuestions);
+    setScore(0);
+    setUserAnswers([]);
+    setNumber(0);
+    setLoading(false);
   };
 
-  const checkAnswer = (e:React.MouseEvent<HTMLButtonElement>) => {
+  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
 
   };
 
@@ -43,9 +50,14 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h1>React Quiz</h1>
-      <button className="start" onClick={startTrivia}>Start</button>
-      <p className="score">Score:</p>
-      <p>Loading Questions...</p>
+      {
+        gameOver || userAnswers.length === TOTAL_QUESTIONS ?
+          (
+            <button className="start" onClick={startTrivia}>Start</button>
+          )
+          : null}
+      {!gameOver ? <p className="score">Score:</p> : null}
+      {loading && <p>Loading Questions...</p>}
       {/* <QuestionCard
         questionNumber={number + 1}
         totalQuestions={TOTAL_QUESTIONS}
