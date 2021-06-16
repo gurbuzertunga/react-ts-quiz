@@ -3,6 +3,8 @@ import { fetchQuizQuestions } from './API';
 import QuestionCard from './components/QuestionCard';
 // TYPES
 import { QuestionState, Difficulty } from './API';
+// Styles
+import { GlobalStyle } from './App.styles';
 
 export type AnswerObject = {
   question: string;
@@ -69,6 +71,8 @@ const App: React.FC = () => {
     }
   }
   return (
+    <>
+    < GlobalStyle />
     <div className="App">
       <h1>React Quiz</h1>
       {
@@ -93,6 +97,7 @@ const App: React.FC = () => {
         <button className="next" onClick={nextQuestion}>Next Question</button>
       ) : null}
     </div>
+    </>
   );
 }
 
