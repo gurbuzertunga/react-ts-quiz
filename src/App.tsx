@@ -74,7 +74,7 @@ const App: React.FC = () => {
     <>
     < GlobalStyle />
     <Wrapper>
-      <h1>React Quiz for Ayşe :d</h1>
+      <h1>Random Quiz</h1>
       {
         gameOver || userAnswers.length === TOTAL_QUESTIONS ?
           (
